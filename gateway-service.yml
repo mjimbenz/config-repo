@@ -17,6 +17,14 @@ spring:
             - Path=/customer-service/**
           filters:
             - StripPrefix=1
+            
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway,health,info
+
 
 eureka:
   client:
