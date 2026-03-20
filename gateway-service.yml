@@ -12,7 +12,7 @@ spring:
 
       routes:
         - id: customer-service
-          uri: http://customer-service:8081
+          uri: http://host.docker.internal:8081
           predicates:
             - Path=/customer-service/**
           filters:
