@@ -7,11 +7,4 @@ spring:
       uri: mongodb://localhost:27017/customer-db
 
 
-springdoc:
-  api-docs:
-    enabled: true
-    path: /api-docs
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
 
