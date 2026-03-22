@@ -17,10 +17,16 @@ spring:
             - Path=/customer-service/**
           filters:
             - StripPrefix=1
-        - id: customer-service
+        - id: passive-product-service
           uri: http://passive-product-service/
           predicates:
             - Path=/passive-product-service/**
+          filters:
+            - StripPrefix=1
+        - id: active-product-service
+          uri: http://active-product-service/
+          predicates:
+            - Path=/active-product-service/**
           filters:
             - StripPrefix=1
 
