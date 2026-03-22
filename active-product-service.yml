@@ -4,6 +4,7 @@ server:
 spring:
   data:
     mongodb:
+      database: passive-product-test-db
       uri: mongodb://localhost:27017/active-product-service-db  #localhost
 
 
