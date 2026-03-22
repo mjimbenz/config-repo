@@ -17,7 +17,13 @@ spring:
             - Path=/customer-service/**
           filters:
             - StripPrefix=1
-            
+        - id: customer-service
+          uri: http://passive-product/
+          predicates:
+            - Path=/passive-product/**
+          filters:
+            - StripPrefix=1
+
 
 management:
   endpoints:
