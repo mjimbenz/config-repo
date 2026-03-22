@@ -18,9 +18,9 @@ spring:
           filters:
             - StripPrefix=1
         - id: customer-service
-          uri: http://passive-product/
+          uri: http://passive-product-service/
           predicates:
-            - Path=/passive-product/**
+            - Path=/passive-product-service/**
           filters:
             - StripPrefix=1
 
