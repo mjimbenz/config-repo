@@ -1,0 +1,39 @@
+
+server:
+  port: 8084
+
+spring:
+  data:
+    mongodb:
+      auto-index-creation: true
+  mongodb:
+    host: localhost
+    port: 27017
+    database: movement-service-db
+
+
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      customerService:
+        slidingWindowSize: 10
+        failureRateThreshold: 60
+        waitDurationInOpenState: 10s
+
+  retry:
+    instances:
+      customerService:
+        maxAttempts: 3
+        waitDuration: 500ms
+
+  timelimiter:
+    instances:
+      customerService:
+        timeoutDuration: 2s
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ #registry-service
