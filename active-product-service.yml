@@ -9,7 +9,7 @@ spring:
   mongodb:
     host: localhost
     port: 27017
-    database: passive-product-service-db
+    database: active-product-service-db
 
 
 
