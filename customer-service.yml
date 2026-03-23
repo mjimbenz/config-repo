@@ -4,7 +4,11 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/customer-db  #localhost
+      auto-index-creation: true
+  mongodb:
+    host: localhost
+    port: 27017
+    database: customer-db
 
 
 
