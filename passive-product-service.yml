@@ -3,7 +3,7 @@ server:
 
 app:
   server:
-    gateway: http://gateway-service
+    gateway: http://gateway-service:8080
 
 spring:
   data:
