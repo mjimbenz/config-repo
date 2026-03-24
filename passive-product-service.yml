@@ -7,7 +7,7 @@ spring:
     mongodb:
       auto-index-creation: true
   mongodb:
-    host: localhost
+    host: mongo
     port: 27017
     database: passive-product-service-db
 
@@ -35,4 +35,4 @@ resilience4j:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/ #registry-service
+      defaultZone: http://registry-service:8761/eureka/ #registry-service
