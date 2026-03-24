@@ -2,6 +2,10 @@
 server:
   port: 8084
 
+app:
+  server:
+    gateway: http://gateway-service
+
 spring:
   data:
     mongodb:
