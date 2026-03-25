@@ -3,7 +3,7 @@ server:
 
 app:
   server:
-    gateway: http://locahost:8080
+    gateway: http://localhost:8080
 
 spring:
   data:
