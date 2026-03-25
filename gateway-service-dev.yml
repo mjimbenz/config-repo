@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      routes:
+        - id: customer-service
+          uri: http://customer-service/
+          predicates:
+            - Path=/customer-service/**
+          filters:
+            - StripPrefix=1
+        - id: passive-product-service
+          uri: http://passive-product-service/
+          predicates:
+            - Path=/passive-product-service/**
+          filters:
+            - StripPrefix=1
+        - id: active-product-service
+          uri: http://active-product-service/
+          predicates:
+            - Path=/active-product-service/**
+          filters:
+            - StripPrefix=1
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
