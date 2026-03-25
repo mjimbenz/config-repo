@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  application:
+    name: api-gateway
+
   cloud:
     gateway:
 
@@ -10,34 +13,112 @@ spring:
           enabled: true
           lower-case-service-id: true
 
+      default-filters:
+        # Agrega correlación a los logs
+        - AddRequestHeader=X-Correlation-Id, #{T(java.util.UUID).randomUUID().toString()}
+
       routes:
+
+        # ======================================================
+        # ✅ CUSTOMER-SERVICE
+        # ======================================================
         - id: customer-service
-          uri: http://customer-service/
+          uri: lb://customer-service
           predicates:
             - Path=/customer-service/**
           filters:
             - StripPrefix=1
+            - name: RequestTimeout
+              args:
+                timeout: 3000
+            - name: Retry
+              args:
+                retries: 2
+                statuses: BAD_GATEWAY, SERVICE_UNAVAILABLE, GATEWAY_TIMEOUT
+                backoff:
+                  firstBackoff: 200ms
+                  maxBackoff: 1000ms
+                  factor: 2
+            - name: CircuitBreaker
+              args:
+                name: customerCB
+                fallbackUri: forward:/fallback/customer
+
+        # ======================================================
+        # ✅ PASSIVE-PRODUCT-SERVICE
+        # ======================================================
         - id: passive-product-service
-          uri: http://passive-product-service/
+          uri: lb://passive-product-service
           predicates:
             - Path=/passive-product-service/**
           filters:
             - StripPrefix=1
+            - name: RequestTimeout
+              args:
+                timeout: 2500
+            - name: Retry
+              args:
+                retries: 3
+                statuses: BAD_GATEWAY, SERVICE_UNAVAILABLE, GATEWAY_TIMEOUT
+            - name: CircuitBreaker
+              args:
+                name: passiveCB
+                fallbackUri: forward:/fallback/passive
+
+        # ======================================================
+        # ✅ ACTIVE-PRODUCT-SERVICE
+        # ======================================================
         - id: active-product-service
-          uri: http://active-product-service/
+          uri: lb://active-product-service
           predicates:
             - Path=/active-product-service/**
           filters:
             - StripPrefix=1
+            - name: RequestTimeout
+              args:
+                timeout: 2000
+            - name: Retry
+              args:
+                retries: 3
+                statuses: INTERNAL_SERVER_ERROR, BAD_GATEWAY, SERVICE_UNAVAILABLE
+            - name: CircuitBreaker
+              args:
+                name: activeCB
+                fallbackUri: forward:/fallback/active
 
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+# ======================================================
+# ✅ CIRCUIT BREAKERS (Resilience4j)
+# ======================================================
+resilience4j:
+  circuitbreaker:
+    instances:
+      customerCB:
+        slidingWindowSize: 20
+        failureRateThreshold: 50
+        waitDurationInOpenState: 8s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+      passiveCB:
+        slidingWindowSize: 15
+        failureRateThreshold: 60
+        waitDurationInOpenState: 6s
+
+      activeCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
 
 
+# ======================================================
+# ✅ LOGS ESTRUCTURADOS (Logstash JSON Encoder)
+# ======================================================
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+
+# Necesita archivo logback-spring.xml (te lo dejo abajo)
 eureka:
   client:
     service-url:
