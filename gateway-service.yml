@@ -30,6 +30,37 @@ spring:
           filters:
             - StripPrefix=1
 
+# ======================================================
+# ✅ CIRCUIT BREAKERS (Resilience4j)
+# ======================================================
+resilience4j:
+  circuitbreaker:
+    instances:
+      customerCB:
+        slidingWindowSize: 20
+        failureRateThreshold: 50
+        waitDurationInOpenState: 8s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+      passiveCB:
+        slidingWindowSize: 15
+        failureRateThreshold: 60
+        waitDurationInOpenState: 6s
+
+      activeCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+
+
+# ======================================================
+# ✅ LOGS ESTRUCTURADOS (Logstash JSON Encoder)
+# ======================================================
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG
+
 
 management:
   endpoints:
