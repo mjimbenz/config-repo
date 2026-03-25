@@ -10,7 +10,7 @@ spring:
     mongodb:
       auto-index-creation: true
   mongodb:
-    host: locahost
+    host: localhost
     port: 27017
     database: passive-product-service-db
 
