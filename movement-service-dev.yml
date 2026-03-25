@@ -20,6 +20,23 @@ spring:
     properties:
       schema.registry.url: http://localhost:8081
 
+    admin:
+      properties:
+        bootstrap.servers: localhost:9092
+      fail-fast: true
+      auto-create: true
+
+    topics:
+      movement-requested:
+        partitions: 3
+        replicas: 1
+      movement-completed:
+        partitions: 3
+        replicas: 1
+      movement-rejected:
+        partitions: 3
+        replicas: 1
+
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
