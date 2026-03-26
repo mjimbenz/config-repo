@@ -1,0 +1,275 @@
+{
+  "info": {
+    "name": "Localhost Microservices Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Active Product Service",
+      "item": [
+        {
+          "name": "GET All Active Products",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/active-product-service"
+          }
+        },
+        {
+          "name": "GET Active Products by Customer",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/active-product-service?customerId=69c36cb8f25f0d128b635a1e"
+          }
+        },
+        {
+          "name": "POST Personal Credit",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/active-product-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c36cb8f25f0d128b635a1e\",\n  \"productType\": \"PERSONAL_CREDIT\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST Credit Card",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/active-product-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c36cb8f25f0d128b635a1e\",\n  \"productType\": \"CREDIT_CARD\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST Business Credit",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/active-product-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c36cb8f25f0d128b635a1e\",\n  \"productType\": \"BUSINESS_CREDIT\"\n}"
+            }
+          }
+        },
+        {
+          "name": "GET Product By ID 1",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/active-product-service/69c056a4c980bb1b3fd54213"
+          }
+        },
+        {
+          "name": "GET Product By ID 2",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/active-product-service/69c377415ec24af97c2ac0bb"
+          }
+        },
+        {
+          "name": "GET Product Balance",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/active-product-service/69c0706b8395620f15daaf22/balance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer Service",
+      "item": [
+        {
+          "name": "GET All Customers",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/customer-service"
+          }
+        },
+        {
+          "name": "POST Customer BUSINESS",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/customer-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"BUSINESS\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"123123\",\n  \"fullname\": \"asd Jiménez\",\n  \"email\": \"miguasel@example.com\",\n  \"phone\": \"987351321\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST Customer PERSONAL",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/customer-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"PERSONAL\",\n  \"documentType\": \"DNI\",\n  \"documentNumber\": \"12345678\",\n  \"fullname\": \"Msadiguel Jiménez\",\n  \"email\": \"miguel@example.com\",\n  \"phone\": \"987351321\"\n}"
+            }
+          }
+        },
+        {
+          "name": "GET Customer By ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/customer-service/69c36cb8f25f0d128b635a1e"
+          }
+        },
+        {
+          "name": "DELETE Customer",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/customer-service/69c1f9f63c45caa33e84556e"
+          }
+        },
+        {
+          "name": "PUT Update Customer",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8080/customer-service/69be120a127b6de4ce70871b"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Movement Service",
+      "item": [
+        {
+          "name": "POST Deposit",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/movement-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c36cb8f25f0d128b635a1e\",\n  \"productId\": \"69c383b706c510be2f17b9f7\",\n  \"movementType\": \"DEPOSIT\",\n  \"amount\": 100.00\n}"
+            }
+          }
+        },
+        {
+          "name": "POST Withdrawal",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/movement-service",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c36cb8f25f0d128b635a1e\",\n  \"productId\": \"69c383b706c510be2f17b9f7\",\n  \"movementType\": \"WITHDRAWAL\",\n  \"amount\": 10\n}"
+            }
+          }
+        },
+        {
+          "name": "GET Movements By Product",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/movement-service/product/69c3a7267e349bd15aeaa75d"
+          }
+        },
+        {
+          "name": "GET Movements By Customer",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/movement-service/?customerId=69c36cb8f25f0d128b635a1e"
+          }
+        },
+        {
+          "name": "GET Movement By ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/movement-service/69c3a74a3fe3e5d27203f770"
+          }
+        },
+        {
+          "name": "DELETE Movement",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/movement-service/69c0b4278ccc381ef20b9dd3"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Passive Product Service",
+      "item": [
+        {
+          "name": "GET All Passive Products",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/passive-product-service/"
+          }
+        },
+        {
+          "name": "POST Saving Account",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/passive-product-service/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c3a6fc3e774cc822f84e9d\",\n  \"accountType\": \"SAVING\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST Fixed Term Account",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/passive-product-service/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c3a6fc3e774cc822f84e9d\",\n  \"accountType\": \"FIXED_TERM\"\n}"
+            }
+          }
+        },
+        {
+          "name": "POST Current Account",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/passive-product-service/",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerId\": \"69c3a6fc3e774cc822f84e9d\",\n  \"accountType\": \"CURRENT\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT Update Passive Product",
+          "request": {
+            "method": "PUT",
+            "url": "http://localhost:8080/passive-product-service/69bf41367b3a326e154e5127"
+          }
+        },
+        {
+          "name": "DELETE Passive Product",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/passive-product-service/69bf5aed87262a8642ffe903"
+          }
+        },
+        {
+          "name": "GET Passive Products by Customer",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/passive-product-service/customer/69c36cb8f25f0d128b635a1e"
+          }
+        },
+        {
+          "name": "GET Passive Product by ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/passive-product-service/69c1fd8e806a6798febea328"
+          }
+        },
+        {
+          "name": "PATCH Update Balance",
+          "request": {
+            "method": "PATCH",
+            "url": "http://localhost:8080/passive-product-service/69c06eab95e385c7e1020c71/balance",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 800\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
