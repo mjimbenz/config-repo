@@ -17,7 +17,7 @@ spring:
     port: 27017
     database: passive-product-service-db
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: kafka:29092
     properties:
       schema.registry.url: http://schema-registry:8081
       specific.avro.reader: true
